@@ -2,11 +2,14 @@ import {IModule} from "../common/models/layout";
 import umModule from "../modules/usermanagement/_share/config/module";
 import timesheetModule from "../modules/timesheet/_share/config/module";
 import registration from "../modules/registration/_share/config/module";
+import security from "../modules/security/_share/config/module";
 import {Languages} from "../common/enum";
+
 let modules: Array<IModule> = [
     umModule,
-    timesheetModule,
-    registration
+    // timesheetModule,
+    // registration,
+     security
 ];
 export default {
     app: {
@@ -23,7 +26,7 @@ export default {
         token: "authtoken"
     },
     api: {
-       baseUrl: "http://localhost:22383/api/"
+        baseUrl: "http://localhost:22383/api/"
     },
     localeUrl: "/app/resources/locales/"
 };

@@ -6,7 +6,7 @@ namespace App.Repository.Impl
 {
     public class Bootstrap : App.Common.Tasks.BaseTask<IBaseContainer>, IBootstrapper
     {
-        public Bootstrap():base(App.Common.ApplicationType.All)
+        public Bootstrap() : base(App.Common.ApplicationType.All)
         {
 
         }
@@ -14,6 +14,7 @@ namespace App.Repository.Impl
         {
             context.RegisterTransient<IUserRepository, UserRepository>();
             context.RegisterTransient<Repository.Common.ILanguageRepository, App.Repository.Impl.Common.LanguageRepository>();
+            context.RegisterTransient<Repository.Security.IPermissionsRepository, App.Repository.Impl.Security.PermissionsRepository>();
         }
     }
 }
