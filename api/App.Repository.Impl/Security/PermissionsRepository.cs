@@ -13,9 +13,9 @@ namespace App.Repository.Impl.Security
 
         }
 
-        public PermissionsRepository(IUnitOfWork unitOfWork) : base(unitOfWork as IMSSQLDbContext)
+        public PermissionsRepository(IUnitOfWork uow) : base(uow.Context as IMSSQLDbContext)
         {
-            
+
         }
     }
 }

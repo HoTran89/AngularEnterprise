@@ -1,6 +1,8 @@
 import {IModule, Module, MenuItem} from "../../../../common/models/layout";
 import {Permissions} from "./../../permission/permissions";
 import {Roles} from "./../../role/roles";
+import {AuthenticationMode} from "../../../../common/enum";
+import {AddPermission} from  "./../../permission/addPermission";
 
 let umModule: IModule = createModule();
 export default umModule;
@@ -9,13 +11,14 @@ function createModule() {
     module.menus.push(
         new MenuItem(
             "Security", "/Permissions", "fa fa-edit",
-            new MenuItem("Permissions", "/Permissions", ""),
-            new MenuItem("Roles", "/Roles", "")
+            new MenuItem("Permissions", "/Permissions", "")
+            // new MenuItem("Roles", "/Roles", "")
         )
     );
     module.addRoutes([
-        { path: "/Permissions", name: "Permissions", component: Permissions },
-        { path: "/Roles", name: "Roles", component: Roles }
+        { path: "/permissions", name: "Permissions", component: Permissions, data: { authentication: AuthenticationMode.Require } },
+        { path: "/addPermission", name: "Add Permission", component: AddPermission, data: { authentication: AuthenticationMode.Require } },
+        // { path: "/roles", name: "Roles", component: Roles }
     ]);
     return module;
 }
