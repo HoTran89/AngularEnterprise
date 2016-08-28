@@ -40,7 +40,7 @@ namespace App.Service.Impl.Security
             Guid guidId;
             if (!Guid.TryParse(id, out guidId))
             {
-                throw  new ValidationException("security.detetePermission.invalidId");
+                throw new ValidationException("security.detetePermission.invalidId");
             }
 
         }
@@ -54,6 +54,61 @@ namespace App.Service.Impl.Security
                 permissionsRepository.Add(permission);
                 uow.Commit();
             }
+        }
+
+        public PermissionListItem GetPermissonById(string id)
+        {
+            ValidattionGetPermissionById(id);
+            IPermissionsRepository permissionsRepository = IoC.Container.Resolve<IPermissionsRepository>();
+            return permissionsRepository.GetById<PermissionListItem>(id);
+        }
+
+        public void Updatepermission(AddPermissionRequest request, string id)
+        {
+            ValidationUpdatePermission(request, id);
+            using (IUnitOfWork uow = new UnitOfWork(new AppDbContext(IOMode.Write)))
+            {
+                IPermissionsRepository permissionsRepository = IoC.Container.Resolve<IPermissionsRepository>(uow);
+                Permission permission = permissionsRepository.GetById(id);
+                if (permission != null)
+                {
+                    permission.Name = request.Name;
+                    permission.Key = request.Key;
+                    permission.Description = request.Description;
+                    uow.Commit();
+                }
+
+            }
+        }
+
+        private void ValidationUpdatePermission(AddPermissionRequest request, string id)
+        {
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                throw new ValidationException("security.detetePermission.invalidId");
+            }
+            Guid guidId;
+            if (!Guid.TryParse(id, out guidId))
+            {
+                throw new ValidationException("security.detetePermission.invalidId");
+            }
+
+            if (string.IsNullOrWhiteSpace(request.Name))
+            {
+                throw new ValidationException("security.addPermission.nameIsRequired");
+            }
+            if (string.IsNullOrWhiteSpace(request.Key))
+            {
+                throw new ValidationException("security.addPermission.keyIsRequired");
+            }
+            if (request.Key.Contains(" "))
+            {
+                throw new ValidationException("security.addPermission.keyHasNotWhiteSpace");
+            }
+        }
+
+        private void ValidattionGetPermissionById(string id)
+        {
         }
 
         private void ValidationAddPermission(AddPermissionRequest permissionRequest)

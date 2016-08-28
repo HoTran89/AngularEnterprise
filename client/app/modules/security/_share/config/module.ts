@@ -18,6 +18,7 @@ function createModule() {
     module.addRoutes([
         { path: "/permissions", name: "Permissions", component: Permissions, data: { authentication: AuthenticationMode.Require } },
         { path: "/addPermission", name: "Add Permission", component: AddPermission, data: { authentication: AuthenticationMode.Require } },
+         { path: "/editPermission", name: "Edit Permission", component: AddPermission, data: { authentication: AuthenticationMode.Require } },
         // { path: "/roles", name: "Roles", component: Roles }
     ]);
     return module;

@@ -7,5 +7,7 @@ namespace App.Service.Security
         IList<PermissionListItem> GetPermissons();
         void DeletePermission(string id);
         void AddPermission(AddPermissionRequest request);
+        PermissionListItem GetPermissonById(string id);
+        void Updatepermission(AddPermissionRequest request, string id);
     }
 }

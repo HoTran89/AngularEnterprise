@@ -25,7 +25,7 @@ export class Permissions extends BasePage {
     }
 
     public onPermissionEditClicked(permission: any) {
-        console.log(permission);
+        this.router.navigate(["Edit Permission", { id: permission.item.id }]);
     }
 
     public onPermissionDeleteClicked(permission: any) {

@@ -32,6 +32,46 @@ namespace App.Api.Features.Security
             return responseData;
         }
 
+        [Route("{id}")]
+        [HttpGet]
+        public IResponseData<PermissionListItem> GetPermission([FromUri]string id)
+        {
+            IResponseData<PermissionListItem> responseData = new ResponseData<PermissionListItem>();
+            try
+            {
+                IPermissionService permissionService = IoC.Container.Resolve<IPermissionService>();
+                PermissionListItem item = permissionService.GetPermissonById(id);
+                responseData.SetData(item);
+            }
+            catch (ValidationException exception)
+            {
+                responseData.SetErrors(exception.Errors);
+                responseData.SetStatus(HttpStatusCode.PreconditionFailed);
+                throw;
+            }
+            return responseData;
+        }
+
+        [Route("{id}")]
+        [HttpPut]
+        public IResponseData<string> UpdatePermission([FromBody] AddPermissionRequest request, [FromUri] string id)
+        {
+            IResponseData<string> responseData = new ResponseData<string>();
+            try
+            {
+                IPermissionService permissionService = IoC.Container.Resolve<IPermissionService>();
+                permissionService.Updatepermission(request, id);
+            }
+            catch (ValidationException exception)
+            {
+                responseData.SetErrors(exception.Errors);
+                responseData.SetStatus(HttpStatusCode.PreconditionFailed);
+
+            }
+            return responseData;
+        }
+
+
         [Route("")]
         [HttpPost]
         public IResponseData<string> AddPermission([FromBody] AddPermissionRequest request)
