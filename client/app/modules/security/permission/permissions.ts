@@ -26,7 +26,10 @@ export class Permissions extends BasePage {
     }
 
     public onPermissionDeleteClicked(permission: any) {
-        console.log(permission);
+        let self: Permissions = this;
+        permissionService.deletePermission(permission.item.id).then(function () {
+            self.loadPermissions();
+        })
     }
 
     private loadPermissions() {

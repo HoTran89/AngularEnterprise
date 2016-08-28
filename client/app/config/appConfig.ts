@@ -9,7 +9,7 @@ let modules: Array<IModule> = [
     umModule,
     // timesheetModule,
     // registration,
-     security
+    security
 ];
 export default {
     app: {
