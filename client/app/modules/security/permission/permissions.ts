@@ -4,6 +4,7 @@ import {PageAction} from "../../../common/models/ui";
 import {BasePage} from "../../../common/models/ui";
 import {PermissionsModel} from "./permissionsModel";
 import permissionService from "../_share/services/permissionService";
+import {Router} from "angular2/router";
 
 @Component({
     templateUrl: "app/modules/security/permission/permissions.html",
@@ -12,13 +13,15 @@ import permissionService from "../_share/services/permissionService";
 
 export class Permissions extends BasePage {
     public model: PermissionsModel = new PermissionsModel();
-    constructor() {
+    public router: Router;
+    constructor(router: Router) {
         super();
         let self: Permissions = this;
+        self.router = router;
         self.model.addAction(new PageAction("btnAddPermission", "security.permissions.addPermissionAction",
             () => self.onAddPermissionClicked())
         )
-        this.loadPermissions();
+        self.loadPermissions();
     }
 
     public onPermissionEditClicked(permission: any) {
@@ -34,12 +37,12 @@ export class Permissions extends BasePage {
 
     private loadPermissions() {
         let self = this;
-        permissionService.getPermissions().then(function (response: Array<any>) {
-            self.model.import(response);
+        permissionService.getPermissions().then(function (permissions: Array<any>) {
+            self.model.import(permissions);
         })
     }
 
     private onAddPermissionClicked() {
-        console.log("onAddPermissionClicked");
+        this.router.navigate(["Add Permission"])
     }
 }

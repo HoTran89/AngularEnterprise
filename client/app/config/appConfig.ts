@@ -6,7 +6,7 @@ import security from "../modules/security/_share/config/module";
 import {Languages} from "../common/enum";
 
 let modules: Array<IModule> = [
-    umModule,
+    // umModule,
     // timesheetModule,
     // registration,
     security

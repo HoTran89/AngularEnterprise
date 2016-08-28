@@ -5,7 +5,10 @@ namespace App.Service.Security
     public interface IPermissionService
     {
         IList<PermissionListItem> GetPermissons();
+<<<<<<< HEAD
         void DeletePermission(string id);
+=======
         void AddPermission(AddPermissionRequest request);
+>>>>>>> feature/addNewPermisson
     }
 }
