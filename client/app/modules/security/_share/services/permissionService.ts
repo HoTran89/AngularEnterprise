@@ -3,8 +3,7 @@ import configHelper from "../../../../common/helpers/configHelper";
 
 let permissionService = {
     getPermissions: getPermissions,
-
-    deletePermission: deletePermission
+    deletePermission: deletePermission,
     addPermission: addPermission
 
 };
